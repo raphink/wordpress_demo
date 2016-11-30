@@ -1,9 +1,14 @@
 ---
-web:
-  image: nginx
-  volumes:
-    - "./html:/usr/share/nginx/html"
+wordpress:
+  image: wordpress
   ports:
-    - "8081:80"
+    - "80:80"
+  links:
+    - "mysql"
 
-
+mysql:
+  image: mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: "aet2NoSh"
+  volumes:
+    - "wordpress_data:/var/lib/mysql"
